@@ -7,3 +7,9 @@ services:
     ports: ["3000:3000"]
     #NOTE: default volume config might be wrong
     volumes: ["./:/app"]
+  redis:
+    image: redis
+    volumes: ["redis-db:/data"]
+
+volumes:
+  redis-db:
