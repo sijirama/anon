@@ -1,7 +1,7 @@
 import { Elysia } from "elysia";
 import Redis from "ioredis"
 
-const app = new Elysia()
+export const app = new Elysia()
 export const redis = new Redis({
     port: 6379,
     host:"redis"
@@ -16,7 +16,7 @@ const redisTest = async () => {
             if (err) {
                 console.error(err);
             } else {
-                console.log(result); // Prints "value"
+                return(result); // Prints "value"
             }
         });
     } catch (e) {
@@ -30,6 +30,10 @@ await redisTest()
 //INFO: test ended!
 
 app.get("/", () => "Welcome to this blog server bitch boy hhhhhhhhhh")
+app.get("/redis", async () => await redisTest() )
+
+
+
 app.listen(3000, () => {
     console.log(
         `Server is running at ${app.server?.hostname}:${app.server?.port}`
