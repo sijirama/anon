@@ -16,14 +16,22 @@ app.get("/todo", async () => {
 
 app.post("/todo", async ({ body, set }) => {
     try {
-        const todos = await redis.get("todo")
-        const newtodos = [ ...todos! , body.content]
-        const response = await redis.set("todo", JSON.stringify(newtodos))
-        set.status = 200
-        return response
+        // Retrieve existing todos from Redis and parse them
+        const existingTodosStr = await redis.get("todo");
+        const existingTodos = existingTodosStr ? JSON.parse(existingTodosStr) : [];
+
+        // Add the new todo to the existing todos array
+        existingTodos.push(body.content);
+
+        // Update Redis with the updated todos
+        await redis.set("todo", JSON.stringify(existingTodos));
+
+        set.status = 200;
+        return { message: "Todo added successfully" };
     } catch (err) {
-        set.status = 500
-        return err
+        console.error(err);
+        set.status = 500;
+        return { error: "Internal Server Error" };
     }
 
 }, {
@@ -32,11 +40,11 @@ app.post("/todo", async ({ body, set }) => {
     })
 })
 
-app.delete("/todo" , async () => {
-    try{
+app.delete("/todo", async () => {
+    try {
         const res = await redis.del("todo")
         return res
-    }catch(err) {
+    } catch (err) {
         return err
     }
 })
