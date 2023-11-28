@@ -7,7 +7,11 @@ export const redis = new Redis({
     host: "redis"
 })
 
-app.get("/", () => "Welcome to this blog server bitch boy hhhhhhhhhh")
+app.get("/", async ({set}) => {
+
+    set.status = 200
+    return await redis.get("")
+} )
 
 app.get("/todo", async () => {
     const allTodos = await redis.get("todo") || []
@@ -51,7 +55,7 @@ app.delete("/todo", async () => {
 
 app.listen(3000, () => {
     console.log(
-        `Server is running at ${app.server?.hostname}:${app.server?.port}`
+        `Bun Server is running at ${app.server?.hostname}:${app.server?.port}`
     );
 });
 
