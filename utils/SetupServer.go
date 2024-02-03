@@ -3,6 +3,7 @@ package utils
 import (
 	"anon/controllers"
 	"anon/db"
+	"anon/public"
 	"anon/template"
 	"net/http"
 
@@ -16,17 +17,15 @@ func SetUpServer(e *echo.Echo) {
 
 	//INFO: template stuff
 	e.Static("/dist", "dist")
-	template.NewTemplateRenderer(e, "public/*.html")
+
+	//INFO: templ renderer
+	//template.NewTemplateRenderer(e, "public/*.html")
+	template.NewTemplateRenderer(e)
 
 	//INFO: run index html
 	e.GET("/", func(c echo.Context) error {
-		//return c.String(http.StatusOK, "Hello, World!")
-		res := map[string]interface{}{
-			"Name":  "Oluwsasijibomi",
-			"Phone": "8888888",
-			"Email": "skyscraper@gmail.com",
-		}
-		return c.Render(http.StatusOK, "index", res)
+		component := public.Index("sijibomi")
+		return template.AssertRender(c, http.StatusOK, component)
 	})
 
 	e.GET("/rooms", controllers.GetAllRooms)
