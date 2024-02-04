@@ -1,6 +1,0 @@
-
-2024-02-04 02:04:12 Database is ready
-2024-02-04 02:06:33 Created Room table
-2024-02-04 02:06:33 Created Message table
-2024-02-04 02:06:33 Database is ready
-2024-02-04 02:06:39 Inserted Room with ID: 1
