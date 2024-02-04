@@ -6,6 +6,8 @@ import (
 	"os"
 
 	"anon/logger"
+	"anon/models"
+
 	_ "github.com/mattn/go-sqlite3" // Import go-sqlite3 library
 )
 
@@ -37,6 +39,9 @@ func DatabseInit() {
 	if error != nil {
 		log.Fatal(error)
 	}
+
+	models.CreateRoomTable(sqliteDatabase)
+	models.CreateMessageTable(sqliteDatabase)
 
 	DatabaseClient = sqliteDatabase //INFO: let other packages use the client connection
 

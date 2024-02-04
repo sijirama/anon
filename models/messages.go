@@ -24,4 +24,5 @@ func CreateMessageTable(db *sql.DB) {
 		logger.LogToFile(fmt.Sprintf("Failed to create message table: %v", err))
 	}
 	statement.Exec() // Execute SQL Statements
+	logger.LogToFile("Created Message table")
 }

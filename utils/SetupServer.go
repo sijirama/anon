@@ -19,15 +19,18 @@ func SetUpServer(e *echo.Echo) {
 	e.Static("/dist", "dist")
 
 	//INFO: templ renderer
-	//template.NewTemplateRenderer(e, "public/*.html")
+	//WARN: before template.NewTemplateRenderer(e, "public/*.html")
 	template.NewTemplateRenderer(e)
 
 	//INFO: run index html
 	e.GET("/", func(c echo.Context) error {
-		component := public.Index("sijibomi")
+		component := public.Index()
 		return template.AssertRender(c, http.StatusOK, component)
 	})
 
+	e.GET("/create/room", controllers.CreateRoom)
 	e.GET("/rooms", controllers.GetAllRooms)
+
+	e.POST("/room", controllers.AddRoom)
 
 }

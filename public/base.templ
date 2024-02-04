@@ -1,22 +1,24 @@
 package public
 
 templ DocType() {
-    <!DOCTYPE html>
+<!DOCTYPE html>
 }
 
 templ Head() {
-  <head>
+
+<head>
     <link rel="stylesheet" href="/dist/tailwind.css" />
     <title>Anon!</title>
-    <script src="https://unpkg.com/htmx.org@1.9.5"
-            integrity="sha384-xcuj3WpfgjlKF+FXhSQFQ0ZNr39ln+hwjN3npfM9VBnUskLolQAcN80McRIVOPuO"
-            crossorigin="anonymous"></script>
-  </head>
+    <script src="https://unpkg.com/htmx.org@1.9.10"
+        integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+        crossorigin="anonymous"></script>
+</head>
 }
 
 
 templ Body(component templ.Component) {
-    <body class="bg-white px-6 w-full flex flex-col relative">
-        {! component}
-    </body>
+
+<body class="bg-white px-6 w-full mx-auto">
+    {! component}
+</body>
 }
