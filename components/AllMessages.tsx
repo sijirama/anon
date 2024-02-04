@@ -1,15 +1,25 @@
-import { db } from "@/lib/db"
+"use client"
+//import { db } from "@/lib/db"
+import { Button } from "./ui/button";
 
-export async function AllMessages() {
-  const rooms = await db.room.findMany();
-  console.log(rooms)
+import { useModal } from "@/hooks/useModalStor";
 
-  return (
-    <div className="space-y-4 flex flex-col">
-      {rooms.map((room) => (
+export function AllMessages() {
+    // const rooms = await db.room.findMany();
+    // console.log(rooms)
+
+    const { onOpen } = useModal()
+
+    return (
+        <div className="space-y-4 flex flex-col">
+            {/*rooms.map((room) => (
         <p className="text-white" key={room.id}>{room.title}</p>
-      ))}
-    </div>
-  );
+      ))*/}
+
+            <Button
+                onClick={() => onOpen("addRoom")}
+            >Create a Room</Button>
+        </div>
+    );
 }
 
