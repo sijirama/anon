@@ -1,6 +1,7 @@
 'use client'
 
 import AddRoomModal from "@/components/custom/AddRoomModal";
+import DeleteRoomModal from "@/components/custom/DeleteRoomModal";
 import { useEffect, useState } from "react";
 
 export function ModalProvider() {
@@ -17,6 +18,7 @@ export function ModalProvider() {
     return (
         <>
             <AddRoomModal />
+            <DeleteRoomModal />
         </>
     )
 

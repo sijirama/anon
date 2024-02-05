@@ -1,5 +1,6 @@
 "use client"
 import { useModal } from "@/hooks/useModalStor";
+import qs from "query-string"
 
 import {
     Dialog,
@@ -31,14 +32,14 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-    title: z.string().min(3).max(50),
     password: z.string().min(3).max(50),
 })
 
 
-export default function AddRoomModal() {
-    const { isOpen, type, onClose } = useModal()
-    const isModalOpen = isOpen && type === "addRoom"
+export default function DeleteRoomModal() {
+    const { isOpen, type, onClose, data } = useModal()
+
+    const isModalOpen = isOpen && type === "deleteRoom"
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -54,30 +55,30 @@ export default function AddRoomModal() {
         //console.log(values)
         try {
             // Make the POST request to create a room
-            const response = await axios.post('/api/rooms', values);
+            //await axios.delete(`/api/rooms/${data.roomId}?password=${values.password}`);
+            const url = qs.stringify({
+                url: `api/rooms/${data.roomId}`,
+                query: {
+                    password: values?.password
+                }
+            })
 
-            const roomId = response.data;
-
-            // Get the current domain from window.location
-            const currentDomain = window.location.origin;
-
-            // Construct the full room URL
-            const roomUrl = `${currentDomain}/rooms/${roomId}`;
+            axios.delete(url)
 
             // Redirect to the new room URL
-            router.push(roomUrl);
+            router.push("/");
 
             //Optionally, you can show a success toast or message
             handleClose()
             toast(
-                'Room created successfully!',
+                'Room deleted successfully!',
             );
         } catch (error) {
-            console.error('Error creating room:', error);
+            console.error('Error deleting room:', error);
 
             // Optionally, show an error toast or message
             toast(
-                'Error creating room. Please try again.',
+                'Error deleting room. Please try again.',
             );
         }
     }
@@ -87,13 +88,14 @@ export default function AddRoomModal() {
         onClose();
     };
 
+    console.log(data.roomId)
     return (
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
             <DialogContent className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-50 overflow-hidden">
                 <DialogHeader>
-                    <DialogTitle>Create a room, Anon!</DialogTitle>
+                    <DialogTitle>Delete this room, Anon!</DialogTitle>
                     <DialogDescription>
-                        Create a room to send messages where everyone will be anonymous.
+                        Are you sure you want to delete this room {data.roomId}
                     </DialogDescription>
                 </DialogHeader>
                 {/* Form stuff */}
@@ -102,26 +104,6 @@ export default function AddRoomModal() {
                         onSubmit={form.handleSubmit(onSubmit)}
                         className="space-y-5 w-full "
                     >
-                        <FormField
-                            control={form.control}
-                            name="title"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel className="uppercase text-xs font-bold text-slate-700 dark:text-slate-100">
-                                        Room name
-                                    </FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            disabled={loading}
-                                            placeholder="Enter room name."
-                                            className="bg-zinc-300/10 border-0 focus-visible:ring-0 text-black dark:text-slate-200 font-semibold focus-visible:ring-offset-0"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage className="font-semibold text-red-500" />
-                                </FormItem>
-                            )}
-                        ></FormField>
                         <FormField
                             control={form.control}
                             name="password"
@@ -139,7 +121,7 @@ export default function AddRoomModal() {
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormDescription>Your password will be used to later delete the room if decided.</FormDescription>
+                                    <FormDescription>only the person that created the room can delete it.</FormDescription>
                                     <FormMessage className="font-semibold text-red-500" />
                                 </FormItem>
                             )}
@@ -148,7 +130,7 @@ export default function AddRoomModal() {
                             <Button type="submit" className="font-bold" variant="default">
                                 {loading ? (null) : (
 
-                                    "Create room"
+                                    "Delete room"
                                 )}
                             </Button>
                         </DialogFooter>

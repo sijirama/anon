@@ -1,11 +1,16 @@
 'use client'
 
+import { Room } from '@prisma/client';
 import { create } from 'zustand';
 
 export type ModalType =
     | 'addRoom'
+    | 'deleteRoom'
+    | 'addMessage'
 
 interface ModalData {
+    room?: Room
+    roomId?: string
 }
 
 interface ModalStore {
@@ -26,5 +31,5 @@ export const useModal = create<ModalStore>(set => ({
     onClose() {
         set({ isOpen: false, type: null });
     },
-    
+
 }));

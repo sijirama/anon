@@ -11,7 +11,7 @@ export async function POST(req: Request) {
         const room = await db.room.create({
             data: {
                 title,
-                password:hashed
+                password: hashed
             }
         })
 
@@ -21,3 +21,15 @@ export async function POST(req: Request) {
         return new NextResponse('Internal error', { status: 500 });
     }
 }
+
+export async function GET(req: Request) {
+    try {
+        const room = await db.room.findMany()
+        return NextResponse.json(room);
+    } catch (e) {
+        console.error('Error processing request:', e);
+        return new NextResponse('Internal error', { status: 500 });
+    }
+}
+
+
