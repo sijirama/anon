@@ -49,7 +49,7 @@ export function AllMessages() {
                 {rooms.length > 0 ? (
 
                     rooms.map((room) => (
-                        <a href={`/rooms/${room.id}`}>
+                        <a href={`/rooms/${room.id}`} key={room.id}>
                             <p className="text-black py-3 px-7 bg-zinc-200 " key={room.id}>{room.title}</p>
                         </a>
                     ))
