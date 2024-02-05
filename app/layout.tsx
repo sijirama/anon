@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ModalProvider } from "@/providers/modal-provider";
 
+import { Toaster } from "@/components/ui/sonner"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,9 +18,10 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className="bg-black">
-            <body className={`${inter.className}w-11/12 md:w-5/6 mx-auto bg-zinc-950`}>
+            <body>
                 <ModalProvider />
                 {children}
+                <Toaster />
             </body>
         </html>
     );
