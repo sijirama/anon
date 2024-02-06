@@ -1,11 +1,9 @@
 "use client"
-import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
-import { useModal } from "@/hooks/useModalStor";
 import { Room } from "@prisma/client";
 import axios from "axios";
 
-export function AllMessages() {
+export function Allmessages() {
 
     //INFO: For just debugging purposes
 
@@ -33,16 +31,11 @@ export function AllMessages() {
 
     //NOTE: ------------------------------------
 
-    const { onOpen } = useModal()
 
 
 
     return (
         <div className="space-y-4 flex flex-col">
-
-            <Button
-                onClick={() => onOpen("addRoom")}
-            >Create a Room</Button>
 
 
             <div className="flex flex-col gap-4">

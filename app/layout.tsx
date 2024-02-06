@@ -16,9 +16,10 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    //<body className={` md:max-w-[90%] lg:max-w-[90%] mx-auto h-full ${inter.className}`}>
     return (
-        <html lang="en" className="bg-black">
-            <body>
+        <html lang="en" className="bg-emerald-100">
+            <body className={`${inter.className}`}>
                 <ModalProvider />
                 {children}
                 <Toaster />
