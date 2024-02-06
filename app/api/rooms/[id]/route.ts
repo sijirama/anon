@@ -13,7 +13,7 @@ export async function DELETE(req: Request,
 
         const password = searchParams.get('password');
 
-        console.log(id, password)
+        //console.log(id, password)
         if (!password || !id) {
             return new NextResponse('Invalid Request', { status: 401 });
         }

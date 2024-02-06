@@ -88,7 +88,6 @@ export default function DeleteRoomModal() {
         onClose();
     };
 
-    console.log(data.roomId)
     return (
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
             <DialogContent className="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-50 overflow-hidden">

@@ -1,5 +1,6 @@
 'use client'
 
+import AddMessageModal from "@/components/custom/AddMessage";
 import AddRoomModal from "@/components/custom/AddRoomModal";
 import DeleteRoomModal from "@/components/custom/DeleteRoomModal";
 import { useEffect, useState } from "react";
@@ -17,6 +18,7 @@ export function ModalProvider() {
 
     return (
         <>
+            <AddMessageModal />
             <AddRoomModal />
             <DeleteRoomModal />
         </>

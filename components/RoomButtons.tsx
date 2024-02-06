@@ -16,7 +16,7 @@ export function RoomButtons({ id }: RoomButtonProps) {
     return (
         <div className="gap-4 flex ">
             <Button
-                onClick={() => onOpen("addMessage")}
+                onClick={() => onOpen("addMessage", { roomId: id })}
             >Add a message</Button>
 
             <Button
