@@ -17,8 +17,8 @@ export default function Home() {
             <section className="bg-zinc-50 w-full min-h-14 py-10 px-5 text-zinc-900 flex gap-3 lg:gap-6 flex-wrap justify-center items-center">
 
                 {
-                    LandingPageBoxes.map((box) => (
-                        <div className="px-5 py-4 flex flex-col gap-5 rounded-lg shadow-md w-[30rem] text-white bg-[#00223b] hover:scale-105 transition-transform duration-300">
+                    LandingPageBoxes.map((box, index) => (
+                        <div key={index} className="px-5 py-4 flex flex-col gap-5 rounded-lg shadow-md w-[30rem] text-white bg-[#00223b] hover:scale-105 transition-transform duration-300">
                             <p className="font-semibold -tracking-wide">{box.topic}</p>
                             <p className="font-extralight -tracking-wide">{box.description}</p>
 
