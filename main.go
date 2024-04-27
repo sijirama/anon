@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/sijiramakun/seapick/recieve"
 	"github.com/urfave/cli/v2"
 	"log"
 	"os"
@@ -9,18 +10,16 @@ import (
 
 var Commands = []*cli.Command{
 	{
-		Name:    "recieve",
-		Usage:   "send a file to a peer",
-		Aliases: []string{"c"},
+		Name:  "recieve",
+		Usage: "send a file to a peer",
 		Action: func(cCtx *cli.Context) error {
-			fmt.Println("completed task: ", cCtx.Args().First())
+			Reciever.Receive()
 			return nil
 		},
 	},
 	{
-		Name:    "receive",
-		Aliases: []string{"t"},
-		Usage:   "wait and listen for a connection",
+		Name:  "send",
+		Usage: "wait and listen for a connection",
 		Subcommands: []*cli.Command{
 			{
 				Name:  "add",
@@ -44,7 +43,7 @@ var Commands = []*cli.Command{
 
 func main() {
 
-	app := &cli.App{Commands: Commands}
+	app := &cli.App{Commands: Commands, EnableBashCompletion: true}
 
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)

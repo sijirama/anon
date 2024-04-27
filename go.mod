@@ -1,4 +1,4 @@
-module github.com/sijirama/seapick
+module github.com/sijiramakun/seapick
 
 go 1.21.6
 
