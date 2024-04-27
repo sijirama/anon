@@ -1,17 +1,19 @@
 package main
 
 import (
-	"fmt"
-	"github.com/sijiramakun/seapick/recieve"
-	"github.com/urfave/cli/v2"
 	"log"
 	"os"
+
+	"github.com/sijiramakun/seapick/recieve"
+	"github.com/sijiramakun/seapick/send"
+	"github.com/urfave/cli/v2"
 )
+
 
 var Commands = []*cli.Command{
 	{
 		Name:  "recieve",
-		Usage: "send a file to a peer",
+		Usage: "wait and listen for a connection",
 		Action: func(cCtx *cli.Context) error {
 			Reciever.Receive()
 			return nil
@@ -19,24 +21,11 @@ var Commands = []*cli.Command{
 	},
 	{
 		Name:  "send",
-		Usage: "wait and listen for a connection",
-		Subcommands: []*cli.Command{
-			{
-				Name:  "add",
-				Usage: "add a new template",
-				Action: func(cCtx *cli.Context) error {
-					fmt.Println("new task template: ", cCtx.Args().First())
-					return nil
-				},
-			},
-			{
-				Name:  "remove",
-				Usage: "remove an existing template",
-				Action: func(cCtx *cli.Context) error {
-					fmt.Println("removed task template: ", cCtx.Args().First())
-					return nil
-				},
-			},
+		Usage: "send a file to a peer",
+		Flags: Sender.Flags,
+		Action: func(cCtx *cli.Context) error {
+			Sender.Send(cCtx)
+			return nil
 		},
 	},
 }
