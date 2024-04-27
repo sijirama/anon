@@ -43,27 +43,13 @@ func handleIncomingRequests(conn net.Conn) {
 		_, err := conn.Read(dataBuffer)
 		utils.CheckError(err)
 
-		//remove this crap
-		// if dataBuffer[0] == byte(0) {
-		// 	length := binary.BigEndian.Uint32(dataBuffer[5:9])
-		// 	segmentNumber := dataBuffer[1:5]
-		// 	seg := fmt.Sprintf("%d", binary.BigEndian.Uint32(segmentNumber))
-		// 	println(length, seg, len(dataBuffer))
-		// }
-
-		//fmt.Println(name, "Number of reps", reps, " Rep number", i, "PINPOINT THISSSSSSSSSSSSSSSSSSSSS")
 		if dataBuffer[0] == byte(0) && dataBuffer[utils.DataSize-1] == byte(1) {
-
-			//segmentNumber := dataBuffer[1:5]
-			//fmt.Printf("Segment Number: %d\n", binary.BigEndian.Uint32(segmentNumber))
-			//fmt.Printf("File Data: %s\n", hex.EncodeToString(dataBuffer[9:9+length]))
 
 			length := binary.BigEndian.Uint32(dataBuffer[5:9])
 			file.Write(dataBuffer[9 : 9+length])
 		} else {
 			log.Fatal("Invalid Segment")
 			dataBuffer = []byte{0}
-
 		}
 
 		conn.Write([]byte("Segment Received"))
