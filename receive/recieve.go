@@ -5,7 +5,7 @@ import (
 	"net"
 
 	//tea "github.com/charmbracelet/bubbletea"
-	"github.com/sijiramakun/seapick/components"
+	//"github.com/sijiramakun/seapick/components"
 	"github.com/sijiramakun/seapick/utils"
 )
 
@@ -21,8 +21,9 @@ func Receive() {
 	defer listener.Close()
 
 	//INFO: spinner component
-	message := fmt.Sprintf("Server is Listening on %s", addr)
-	components.Spinner(message)
+	message := fmt.Sprintf("Server is Listening on %s\n\n", addr)
+	// components.Spinner(message)
+	fmt.Printf(message)
 
 	for {
 		conn, err := listener.Accept()

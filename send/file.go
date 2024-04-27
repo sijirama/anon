@@ -32,7 +32,7 @@ func prepareFIleMetaData(file *os.File) FileMetaData {
 	header := FileMetaData{
 		name:     fileInfo.Name(),
 		fileSize: uint32(size),
-		reps:     uint32(size/1014) + 1,
+		reps:     uint32(size/int64(DataSize)) + 1,
 	}
 
 	return header

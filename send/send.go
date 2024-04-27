@@ -1,7 +1,6 @@
 package Sender
 
 import (
-	"fmt"
 	"log"
 	"net"
 
@@ -29,7 +28,7 @@ var Flags = []cli.Flag{
 }
 
 func Send(ctx *cli.Context) {
-	fmt.Println(receiverAddr, fileAddr)
+
 	if receiverAddr == "" {
 		log.Fatalf("Receiver address is missing, input the --receiver flag")
 	}
