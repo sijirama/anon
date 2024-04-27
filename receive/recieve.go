@@ -1,8 +1,12 @@
 package Receiver
 
 import (
-	"github.com/sijiramakun/seapick/utils"
+	"fmt"
 	"net"
+
+	//tea "github.com/charmbracelet/bubbletea"
+	"github.com/sijiramakun/seapick/components"
+	"github.com/sijiramakun/seapick/utils"
 )
 
 func Receive() {
@@ -16,7 +20,9 @@ func Receive() {
 
 	defer listener.Close()
 
-	println("Server is listening on Address ", addr)
+	//INFO: spinner component
+	message := fmt.Sprintf("Server is Listening on %s", addr)
+	components.Spinner(message)
 
 	for {
 		conn, err := listener.Accept()
