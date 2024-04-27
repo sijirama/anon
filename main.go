@@ -4,18 +4,17 @@ import (
 	"log"
 	"os"
 
-	"github.com/sijiramakun/seapick/recieve"
+	"github.com/sijiramakun/seapick/receive"
 	"github.com/sijiramakun/seapick/send"
 	"github.com/urfave/cli/v2"
 )
 
-
 var Commands = []*cli.Command{
 	{
-		Name:  "recieve",
+		Name:  "receive",
 		Usage: "wait and listen for a connection",
 		Action: func(cCtx *cli.Context) error {
-			Reciever.Receive()
+			Receiver.Receive()
 			return nil
 		},
 	},

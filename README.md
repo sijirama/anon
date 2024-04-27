@@ -1,10 +1,9 @@
 # Seapick (WIP)
 
-![stuff](./assets/help.png)
+p2p file transfer over the TCP
 
-## start a server
-![stuff](./assets/recieve.png)
+```
+seapick help
 
-## send a file
-![stuff](./assets/send.png)
-
+```
+work in progress so docs is ass, proper docs when mvp is reached.

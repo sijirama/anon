@@ -10,15 +10,15 @@ import (
 )
 
 var TYPE = "tcp"
-var recieverAddr string
+var receiverAddr string
 var fileAddr string
 
 var Flags = []cli.Flag{
 	&cli.StringFlag{
-		Name:        "reciever",
+		Name:        "receiver",
 		Aliases:     []string{"r"},
-		Usage:       "Address of the reciever",
-		Destination: &recieverAddr,
+		Usage:       "Address of the receiver",
+		Destination: &receiverAddr,
 	},
 	&cli.StringFlag{
 		Name:        "file",
@@ -29,17 +29,17 @@ var Flags = []cli.Flag{
 }
 
 func Send(ctx *cli.Context) {
-	fmt.Println(recieverAddr, fileAddr)
-	if recieverAddr == "" {
-		log.Fatalf("Receiver address is missing, input the --reciever flag")
+	fmt.Println(receiverAddr, fileAddr)
+	if receiverAddr == "" {
+		log.Fatalf("Receiver address is missing, input the --receiver flag")
 	}
-	tcpServer, err := net.ResolveTCPAddr(TYPE, recieverAddr)
+	tcpServer, err := net.ResolveTCPAddr(TYPE, receiverAddr)
 	utils.CheckError(err)
 
 	conn, err := net.DialTCP(TYPE, nil, tcpServer)
 
 	if fileAddr == "" || !isFile(fileAddr) {
-		log.Fatalf("File address is missing, input the --reciever flag")
+		log.Fatalf("File address is missing, input the --receiver flag")
 	}
 
 	sendFIle(fileAddr, conn)

@@ -1,4 +1,4 @@
-package Reciever
+package Receiver
 
 import (
 	"github.com/sijiramakun/seapick/utils"
@@ -16,13 +16,12 @@ func Receive() {
 
 	defer listener.Close()
 
-	println("Server has started on Address ", addr)
+	println("Server is listening on Address ", addr)
 
 	for {
 		conn, err := listener.Accept()
 		utils.CheckError(err)
 		go handleIncomingRequests(conn)
-
 	}
 
 }

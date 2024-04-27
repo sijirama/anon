@@ -1,4 +1,4 @@
-package Reciever
+package Receiver
 
 import (
 	"encoding/binary"
@@ -56,7 +56,7 @@ func handleIncomingRequests(conn net.Conn) {
 			log.Fatal("Invalid Segment")
 		}
 
-		conn.Write([]byte("Segment Recieved"))
+		conn.Write([]byte("Segment Received"))
 
 	}
 
